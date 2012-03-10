@@ -1,0 +1,35 @@
+@(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Mini-Todo</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/dom.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/ajax.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/dream.js")"></script>
+    @helper.javascriptRouter("Routes")(
+      routes.javascript.Tasks.create,
+      routes.javascript.Tasks.toggle,
+      routes.javascript.Tasks.update,
+      routes.javascript.Tasks.delete
+    )
+  </head>
+  <body>
+    <article>
+      @content
+    </article>
+    <footer>
+      <p>
+        <a href="@routes.Tasks.index">Static</a>
+        <a href="@routes.Tasks.tasks1">Tasks1</a>
+        <a href="@routes.Tasks.tasks2">Tasks2</a>
+        <a href="@routes.Tasks.tasks3">Tasks3</a>
+        <a href="@routes.Tasks.tasks4">Tasks4</a>
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+body {
+	background: #EEE;
+	margin: 0;
+}
+
+body > article {
+	max-width: 500px;
+	margin: 0 auto;
+	background: white;
+	box-shadow: rgba(0,0,0,0.2) 0 2px 6px 0;
+	border-radius: 0 0 5px 5px;
+	padding: 2%;
+}
+
+form.task-form {
+	text-align: center;
+}
+
+form.task-form > input {
+	width: 100%;
+	font-size: 1.8em;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 1em 0 0 0;
+}
+
+ul > li {
+	font-size: 1.4em;
+	line-height: 1.6em;
+	display: -webkit-box;
+	border-bottom: thin groove white;
+}
+
+ul > li.done > span {
+	text-decoration: line-through;
+	color: gray;
+	font-style: italic;
+}
+
+ul > li > span {
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+}
+
+ul > li > a {
+	display: -webkit-box;
+	width: 3em;
+}
+
+form dl {
+	display: -webkit-box;
+}
+
+form dl dt {
+	display: -webkit-box;
+	width: 5em;
+}
+
+form dl dd {
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+	margin: 0;
+	padding: 2px;
+}
+
+form dl dd input[type=text] {
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+footer {
+	text-align: center;
+}

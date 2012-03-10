@@ -1,0 +1,41 @@
+@(tasks: Iterable[(Long, Task)])(implicit flash: play.api.mvc.Flash)
+
+@scripts = {
+  <script type="text/javascript">
+      (function () {
+      var binder = dream.binder({
+        selector: 'li',
+        bind: function (root) {
+          var done = dom.create('input', { type: 'checkbox', checked: dom.hasClass('done', root) });
+          
+          done.onchange = function () {
+            ajax.call({
+              action: Routes.controllers.Tasks.toggle(root.dataset.id),
+              success: function () { dom.toggleClass('done', root) }
+            });
+          };
+          
+          root.insertBefore(done, dom.find('span', root))
+        }
+      });
+      
+      binder.bindAll()
+    })()
+    /*$(function () {
+      $('li').each(function () {
+        var $task = $(this);
+        var $done = $('<input type="checkbox"' + ($task.hasClass('done') ? ' checked' : '') + ' />');
+        
+        $done.change(function () {
+          Routes.controllers.Tasks.toggle($task.attr('data-id')).ajax({
+            success: function () { $task.toggleClass('done'); }
+          });
+        });
+        
+        $task.prepend($done)
+      });
+    });*/
+  </script>
+}
+
+@index(tasks, scripts)

@@ -1,0 +1,78 @@
+@(tasks: Iterable[(Long, Task)])(implicit flash: play.api.mvc.Flash)
+
+@scripts = {
+  <script type="text/javascript">
+    // Meet PAC
+    (function () {
+      
+      var model, task, view, binder;
+      
+      
+      // --- MODEL
+      model = function (spec) {
+        var that = dream.model({ mixin: spec});
+        
+        that.toggle = function () {
+          that.done = !that.done
+        };
+        
+        return that
+      };
+      
+      
+      // --- VIEW
+      view = function (spec) {
+        var that = dream.view(spec);
+        
+        that.update = function () {
+          that.done.checked = that.control.done;
+          dom.toggleClass('done', that.root, that.control.done)
+        };
+        
+        that.bindEvents = function () {
+          that.on('change', that.done, that.control.toggle)
+        };
+        
+        return that
+      };
+      
+      
+      // --- CONTROL
+      task = function (spec) {
+        var that = dream.control({
+          view: spec.view,
+          mixin: dream.proxify(model(spec.model), {
+            toggle: dream.proxies.after(function () { that.view.update() })
+          })
+        });
+        
+        return that
+      };
+      
+      // --- BINDER
+      binder = dream.binder({
+        selector: 'li',
+        control: task,
+        view: view,
+        bind: function (root) {
+          var done = dom.create('input', { type: 'checkbox', checked: dom.hasClass('done', root) });
+          root.insertBefore(done, dom.find('span', root));
+          
+          return {
+            view: {
+              done: done
+            },
+            model: {
+              done: done.checked
+            }
+          }
+        }
+      });
+      
+      binder.bindAll();
+      
+    })();
+  </script>
+}
+
+@index(tasks, scripts)

@@ -1,0 +1,17 @@
+@(id: Long, task: Form[Task])
+
+@import helper._
+
+@main {
+  @form(routes.Tasks.update(id)) {
+  
+    @inputText(task("name"), 'label -> "Name")
+    @checkbox(task("done"), 'label -> "Done")
+    
+    <input type="submit" value="Save" />
+  }
+  
+  @form(routes.Tasks.delete(id)) {
+    <input type="submit" value="Delete" class="delete" />
+  }
+}

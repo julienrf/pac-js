@@ -1,0 +1,24 @@
+@(tasks: Iterable[(Long, Task)], scripts: Html = Html.empty)(implicit flash: play.api.mvc.Flash)
+
+@import helper._
+
+@main {
+
+  @form(routes.Tasks.create, 'class->"task-form") {
+    <input type="text" name="name" placeholder="What's next?" />
+    @flash.get("error").map { err =>
+      <div class="error">@err</div>
+    }
+  }
+
+  <ul>
+    @for((id, task) <- tasks) {
+      <li @if(task.done) { class="done" } data-id="@id">
+        <span>@task.name</span>
+        <a href="@routes.Tasks.edit(id)">Edit</a>
+      </li>
+    }
+  </ul>
+  
+  @scripts
+}

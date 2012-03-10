@@ -1,0 +1,12 @@
+logs
+project/project
+project/target
+target
+tmp
+.idea/
+.settings/
+.classpath
+.project
+.cache
+.target/
+.DS_Store
